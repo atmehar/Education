@@ -1,0 +1,18 @@
+{% extends 'app1/base.html' %}
+
+{% block content %}
+
+<h2>Student Details</h2>
+
+<p><strong>Full Name:</strong> {{ student.full_name }}</p>
+<p><strong>Roll Number:</strong> {{ student.roll_number }}</p>
+<p><strong>Email:</strong> {{ student.email }}</p>
+<p><strong>Age:</strong> {{ student.age }}</p>
+<p><strong>Course:</strong> {{ student.course }}</p>
+<p><strong>Address:</strong> {{ student.address }}</p>
+<p><strong>Date Joined:</strong> {{ student.date_joined }}</p>
+
+<br>
+<a href="{% url 'home' %}">Back to Home</a>
+
+{% endblock %}

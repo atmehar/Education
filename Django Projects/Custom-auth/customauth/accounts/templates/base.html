@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Custom Auth{% endblock %}</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial;
+        }
+
+        /* NAVBAR */
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px 40px;
+            background: #2c3e50;
+            color: white;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .navbar h2 {
+            margin: 0;
+            font-size: 24px;
+            letter-spacing: 1px;
+        }
+
+        .navbar-links {
+            display: flex;
+            gap: 12px;
+        }
+
+        .navbar a {
+            text-decoration: none;
+            color: white;
+            background: #e74c3c;
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-weight: bold;
+            transition: 0.25s;
+        }
+
+        .navbar a:hover {
+            background: #c0392b;
+            transform: translateY(-2px);
+        }
+
+        /* PAGE CONTAINER */
+
+        .container {
+            padding: 30px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        
+
+        /* BLOG CARDS */
+
+        .blog-card {
+            background: white;
+            padding: 22px;
+            margin-bottom: 22px;
+            border-radius: 10px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+            transition: 0.25s;
+        }
+
+        .blog-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
+        }
+
+        .blog-title {
+            font-size: 22px;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+
+        .blog-title a {
+            text-decoration: none;
+            color: #2c3e50;
+        }
+
+        .blog-title a:hover {
+            color: #2980b9;
+        }
+
+        .blog-meta {
+            font-size: 14px;
+            color: #7f8c8d;
+            margin-bottom: 12px;
+        }
+
+        .blog-content {
+            font-size: 16px;
+            line-height: 1.6;
+            color: #333;
+            margin-bottom: 12px;
+        }
+
+        .blog-actions a {
+            margin-right: 12px;
+            text-decoration: none;
+            font-weight: bold;
+            color: #2980b9;
+        }
+
+        .blog-actions a:hover {
+            text-decoration: underline;
+        }
+
+        /* login and register FORM CARD */
+
+        form {
+            background: transparent;
+            color: white;
+            padding: 30px 40px;
+            border-radius: 10px;
+            border: 1px solid rgba(0,0,0,0.1);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            max-width: 450px;
+            margin: 0 auto;
+            backdrop-filter: blur(10px);
+        }
+        form h2 {
+            color: white;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        
+
+        form p label {
+            font-weight: bold;
+            color: black;
+        }
+
+        input,
+        textarea {
+            width: 100%;
+            height: 50px;
+            margin: 30px 0;
+            font-weight: 600;
+            padding: 10px;
+            margin-top: 6px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            box-sizing: border-box;
+            font-size: 14px;
+        }
+
+        input:focus,
+        textarea:focus {
+            outline: none;
+            border-color: #2980b9;
+            box-shadow: 0 0 4px rgba(41, 128, 185, 0.4);
+        }
+
+        button {
+            background: #2c3e50;
+            color: white;
+            border: none;
+            padding: 11px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 15px;
+            width: 100%;
+            transition: 0.2s;
+        }
+
+        button:hover {
+            background: #34495e;
+        }
+        .register{
+            color: black; 
+            font-weight: 600; 
+            text-decoration: none
+        }
+        .register:hover{
+            text-decoration: underline;
+        }
+        .already-have-account{
+            color: black ; 
+            text-align: center;
+            margin: 10px;
+        }
+
+
+        /* ERROR LIST */
+
+        .error-list {
+            background: #fdecea;
+            color: #c0392b;
+            padding: 10px 15px;
+            border-radius: 6px;
+            margin-bottom: 15px;
+        }
+
+        .error-list li {
+            margin-left: 15px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="navbar">
+
+        <h2>Custom Auth Project</h2>
+
+        <div class="navbar-links">
+
+            {% if request.user.is_authenticated %}
+            <a href="{% url 'blog_list' %}">Blogs</a>
+            <a href="{% url 'my_blogs' %}">My Blogs</a>
+            <a href="{% url 'blog_create' %}">New Blog</a>
+            <a href="{% url 'profile' %}">Profile</a>
+            <a href="{% url 'logout' %}">Logout</a>
+            {% else %}
+            <a href="{% url 'blog_list' %}">Blogs</a>
+            <a href="{% url 'login' %}">Login</a>
+            <a href="{% url 'register' %}">Register</a>
+            {% endif %}
+
+        </div>
+
+    </div>
+
+    <div class="container {% block page_class %}{% endblock %}">
+
+        {% block content %}
+        {% endblock %}
+
+    </div>
+
+</body>
+
+</html>

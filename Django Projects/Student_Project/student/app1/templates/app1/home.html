@@ -1,0 +1,28 @@
+{% extends 'app1/base.html' %}
+
+{% block content %}
+
+<form method="GET">
+    <input type="text" name="q" placeholder="Search by name">
+    <button type="submit">Search</button>
+</form>
+
+<br>
+
+<a href="{% url 'add_student' %}">Add Student</a>
+
+<h2>Student List</h2>
+
+<ul>
+    {% for student in students %}
+        <li>
+            <a href="{% url 'student_detail' student.id %}">
+                {{ student.full_name }}
+            </a>
+        </li>
+    {% empty %}
+        <li>No students found.</li>
+    {% endfor %}
+</ul>
+
+{% endblock %}

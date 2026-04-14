@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block title %}My Blogs{% endblock %}
+
+{% block content %}
+<h2>My Blog Posts</h2>
+
+{% if blogs %}
+    <ul>
+        {% for blog in blogs %}
+            <li style="margin-bottom: 16px;">
+                <h3>
+                    <a href="{% url 'blog_detail' slug=blog.slug %}">{{ blog.title }}</a>
+                </h3>
+                <p>
+                    <small>
+                        Status: {{ blog.get_status_display }} |
+                        Created: {{ blog.created_at|date:"Y-m-d H:i" }}
+                    </small>
+                </p>
+                <p>{{ blog.content|truncatewords:30 }}</p>
+
+                <p>
+                    <a href="{% url 'blog_edit' slug=blog.slug %}">Edit</a> |
+                    <a href="{% url 'blog_delete' slug=blog.slug %}">Delete</a>
+                </p>
+            </li>
+        {% endfor %}
+    </ul>
+{% else %}
+    <p>You have not written any blog posts yet.</p>
+{% endif %}
+
+{% endblock %}
+
